@@ -1,5 +1,3 @@
-
-
 public class Employee {
 
 	public String employeeID;

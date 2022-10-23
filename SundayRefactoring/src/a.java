@@ -8,6 +8,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.logging.Level;
 import java.sql.Statement;
 import java.io.IOException;
@@ -29,11 +30,19 @@ public class a extends c1 {
 			Class.forName("com.mysql.jdbc.Driver");
 			c = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
 					p.getProperty("password"));
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
-		} 
+			e.printStackTrace();
+		}
 	}
 
-	public void a2() {
+	public void readEmployeesDetails2() {
 
 		try {
 			int s = c3.XMLXPATHS().size();
@@ -49,16 +58,38 @@ public class a extends c1 {
 				el.add(EMPLOYEE);
 				System.out.println(EMPLOYEE.toString() + "\n");
 			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+			
+		} catch (NegativeArraySizeException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
+			
 		}
 	}
 
-	public void a3() {
+	public void updateEmployeeDetails() {
 		try {
 			s = c.createStatement();
 			s.executeUpdate(c2.Q("q2"));
 			s.executeUpdate(c2.Q("q1"));
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -78,11 +109,22 @@ public class a extends c1 {
 			}
 			ps.executeBatch();
 			c.commit();
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void eMPLOYEEGETBYID(String eid) {
+	public void employeeGetById(String eid) {
 
 		Employee e = new Employee();
 		try {
@@ -99,19 +141,30 @@ public class a extends c1 {
 			}
 			ArrayList<Employee> l = new ArrayList<Employee>();
 			l.add(e);
-			eMPLOYEEoUTPUT(l);
-		} catch (Exception ex) {
+			employeeOutPut(l);
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			
 		}
 	}
 
-	public void EMPLOYEEDELETE(String eid) {
+	public void employeeDelete(String eid) {
 
 		try {
 			ps = c.prepareStatement(c2.Q("q6"));
 			ps.setString(1, eid);
 			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 	}
 
@@ -131,12 +184,22 @@ public class a extends c1 {
 				e.setDesignation(r.getString(6));
 				l.add(e);
 			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		eMPLOYEEoUTPUT(l);
+		employeeOutPut(l);
 	}
 	
-	public void eMPLOYEEoUTPUT(ArrayList<Employee> l){
+	public void employeeOutPut(ArrayList<Employee> l){
 		
 		System.out.println("Employee ID" + "\t\t" + "Full Name" + "\t\t" + "Address" + "\t\t" + "Faculty Name" + "\t\t"
 				+ "Department" + "\t\t" + "Designation" + "\n");
