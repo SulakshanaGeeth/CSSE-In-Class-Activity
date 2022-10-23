@@ -2,22 +2,22 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
-public class d {
+public class EmployeeDemo {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		a a1 = new a();
+		JDBConnect con = new JDBConnect();
 		try {
-			c3.rEQUESTtRANSFORM();
-			a1.a2();
-			a1.updateEmployeeDetails();
-			a1.a4();
+			saveFilesPath.rEQUESTtRANSFORM();
+			con.readFilesPath();
+			con.updateEmployeeDetails();
+			con.insertEmployeeDetails();
 //			employeeService.eMPLOYEEGETBYID("EMP10004");
 //			employeeService.EMPLOYEEDELETE("EMP10001");
-			a1.readEmployeesDetails();
+			con.readEmployeesDetails();
 			
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();

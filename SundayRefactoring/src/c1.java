@@ -6,11 +6,11 @@ import java.util.Properties;
 
 public class c1 {
 
-	public static final Properties p = new Properties();
+	public static final Properties properties = new Properties();
 
 	static {
 		try {
-			p.load(c2.class.getResourceAsStream("../config/config.properties"));
+			properties.load(c2.class.getResourceAsStream("../config/config.properties"));
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
