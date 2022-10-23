@@ -1,5 +1,3 @@
-
-
 import org.xml.sax.SAXException;
 import java.sql.Connection;
 import java.util.logging.Logger;
@@ -10,6 +8,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.logging.Level;
 import java.sql.Statement;
 import java.io.IOException;
@@ -26,16 +25,24 @@ public class a extends c1 {
 
 	private PreparedStatement ps;
 
-	public a() {
+	public a() throws Exception {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			c = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
 					p.getProperty("password"));
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
-		} 
+			e.printStackTrace();
+		}
 	}
 
-	public void a2() {
+	public void a2() throws Exception {
 
 		try {
 			int s = c3.XMLXPATHS().size();
@@ -51,7 +58,18 @@ public class a extends c1 {
 				el.add(EMPLOYEE);
 				System.out.println(EMPLOYEE.toString() + "\n");
 			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+			
+		} catch (NegativeArraySizeException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
+			
 		}
 	}
 
@@ -60,7 +78,18 @@ public class a extends c1 {
 			s = c.createStatement();
 			s.executeUpdate(c2.Q("q2"));
 			s.executeUpdate(c2.Q("q1"));
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -80,7 +109,18 @@ public class a extends c1 {
 			}
 			ps.executeBatch();
 			c.commit();
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -133,7 +173,17 @@ public class a extends c1 {
 				e.dESIGNATION(r.getString(6));
 				l.add(e);
 			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		eMPLOYEEoUTPUT(l);
 	}

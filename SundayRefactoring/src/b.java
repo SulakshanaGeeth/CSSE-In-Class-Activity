@@ -1,5 +1,3 @@
-
-
 public class b {
 
 	public String iDeMPLOYEE;
