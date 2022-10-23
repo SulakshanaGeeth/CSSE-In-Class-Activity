@@ -13,12 +13,18 @@ public class d {
 		try {
 			c3.rEQUESTtRANSFORM();
 			a1.a2();
-			a1.a3();
+			a1.updateEmployeeDetails();
 			a1.a4();
 //			employeeService.eMPLOYEEGETBYID("EMP10004");
 //			employeeService.EMPLOYEEDELETE("EMP10001");
-			a1.a5();
+			a1.readEmployeesDetails();
+			
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
+			
 		}
 
 	}
