@@ -15,21 +15,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class a extends c1 {
+public class JDBConnect extends c1 {
 
-	private final ArrayList<Employee> el = new ArrayList<Employee>();
+	private final ArrayList<Employee> employees = new ArrayList<Employee>();
 
-	private static Connection c;
+	private static Connection connection;
 
-	private static Statement s;
+	private static Statement statement;
 
-	private PreparedStatement ps;
+	private PreparedStatement preparedStatement;
 
-	public a() {
+	public JDBConnect() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			c = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
-					p.getProperty("password"));
+			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
+					properties.getProperty("password"));
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -42,12 +42,12 @@ public class a extends c1 {
 		}
 	}
 
-	public void readEmployeesDetails2() {
+	public void readFilesPath() {
 
 		try {
-			int s = c3.XMLXPATHS().size();
+			int s = saveFilesPath.XMLXPATHS().size();
 			for (int i = 0; i < s; i++) {
-				Map<String, String> l = c3.XMLXPATHS().get(i);
+				Map<String, String> l = saveFilesPath.XMLXPATHS().get(i);
 				Employee EMPLOYEE = new Employee();
 				EMPLOYEE.setEmployeeID(l.get("XpathEmployeeIDKey"));
 				EMPLOYEE.setFullName(l.get("XpathEmployeeNameKey"));
@@ -55,7 +55,7 @@ public class a extends c1 {
 				EMPLOYEE.setFacultyName(l.get("XpathFacultyNameKey"));
 				EMPLOYEE.setDepartment(l.get("XpathDepartmentKey"));
 				EMPLOYEE.setDesignation(l.get("XpathDesignationKey"));
-				el.add(EMPLOYEE);
+				employees.add(EMPLOYEE);
 				System.out.println(EMPLOYEE.toString() + "\n");
 			}
 		} catch (NullPointerException e) {
@@ -75,9 +75,9 @@ public class a extends c1 {
 
 	public void updateEmployeeDetails() {
 		try {
-			s = c.createStatement();
-			s.executeUpdate(c2.Q("q2"));
-			s.executeUpdate(c2.Q("q1"));
+			statement = connection.createStatement();
+			statement.executeUpdate(c2.Q("q2"));
+			statement.executeUpdate(c2.Q("q1"));
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -93,22 +93,22 @@ public class a extends c1 {
 		}
 	}
 
-	public void a4() {
+	public void insertEmployeeDetails() {
 		try {
-			ps = c.prepareStatement(c2.Q("q3"));
-			c.setAutoCommit(false);
-			for(int i = 0; i < el.size(); i++){
-				Employee e = el.get(i);
-				ps.setString(1, e.getEmplyeeID());
-				ps.setString(2, e.getFullName());
-				ps.setString(3, e.getFacultyName());
-				ps.setString(4, e.getFacultyName());
-				ps.setString(5, e.getDepartment());
-				ps.setString(6, e.getDesignation());
-				ps.addBatch();
+			preparedStatement = connection.prepareStatement(c2.Q("q3"));
+			connection.setAutoCommit(false);
+			for(int i = 0; i < employees.size(); i++){
+				Employee e = employees.get(i);
+				preparedStatement.setString(1, e.getEmplyeeID());
+				preparedStatement.setString(2, e.getFullName());
+				preparedStatement.setString(3, e.getFacultyName());
+				preparedStatement.setString(4, e.getFacultyName());
+				preparedStatement.setString(5, e.getDepartment());
+				preparedStatement.setString(6, e.getDesignation());
+				preparedStatement.addBatch();
 			}
-			ps.executeBatch();
-			c.commit();
+			preparedStatement.executeBatch();
+			connection.commit();
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -128,9 +128,9 @@ public class a extends c1 {
 
 		Employee e = new Employee();
 		try {
-			ps = c.prepareStatement(c2.Q("q4"));
-			ps.setString(1, eid);
-			ResultSet R = ps.executeQuery();
+			preparedStatement = connection.prepareStatement(c2.Q("q4"));
+			preparedStatement.setString(1, eid);
+			ResultSet R = preparedStatement.executeQuery();
 			while (R.next()) {
 				e.setEmployeeID(R.getString(1));
 				e.setFullName(R.getString(2));
@@ -155,9 +155,9 @@ public class a extends c1 {
 	public void employeeDelete(String eid) {
 
 		try {
-			ps = c.prepareStatement(c2.Q("q6"));
-			ps.setString(1, eid);
-			ps.executeUpdate();
+			preparedStatement = connection.prepareStatement(c2.Q("q6"));
+			preparedStatement.setString(1, eid);
+			preparedStatement.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -168,12 +168,12 @@ public class a extends c1 {
 		}
 	}
 
-	public void a5() {
+	public void readEmployeesDetails() {
 
 		ArrayList<Employee> l = new ArrayList<Employee>();
 		try {
-			ps = c.prepareStatement(c2.Q("q5"));
-			ResultSet r = ps.executeQuery();
+			preparedStatement = connection.prepareStatement(c2.Q("q5"));
+			ResultSet r = preparedStatement.executeQuery();
 			while (r.next()) {
 				Employee e = new Employee();
 				e.setEmployeeID(r.getString(1));
