@@ -1,4 +1,11 @@
+package com.employee.utill;
 import org.xml.sax.SAXException;
+
+import com.employee.model.Employee;
+import com.employee.services.readContent;
+import com.employee.services.readProperty;
+import com.employee.services.saveFilesPath;
+
 import java.sql.Connection;
 import java.util.logging.Logger;
 import java.sql.DriverManager;
@@ -15,31 +22,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class JDBConnect extends c1 {
+public class JDBConnect extends readProperty {
 
 	private final ArrayList<Employee> employees = new ArrayList<Employee>();
 
 	private static Connection connection;
 
 	private static Statement statement;
+	
+	private static JDBConnect jdbConnect;
 
 	private PreparedStatement preparedStatement;
+	
+	private String url = properties.getProperty("url");
+	private String username = properties.getProperty("username");
+	private String password = properties.getProperty("password");
 
-	public JDBConnect() {
+	public JDBConnect() {		
+		connection = this.getConnection();		
+	}
+	
+	public static JDBConnect getInstance() {
+		
+		if(jdbConnect == null) {
+			jdbConnect = new JDBConnect();
+		}
+		
+		return jdbConnect;
+	}
+	
+	public Connection getConnection() {
+		
+		Connection con = null;	
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
-					properties.getProperty("password"));
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			con = DriverManager.getConnection(url, username, password);
 
 		} catch (Exception e) {
 			// e.printStackTrace();
+		}	
+		
+		if (con == null) {
+			System.out.println("Error while connecting to the database. \n");
 		}
+		return con;		
 	}
 
-	public void readFilesPath() {
+	public void readFilesPathXML() {
 
 		try {
 			int s = saveFilesPath.xmlxpaths().size();
@@ -70,8 +100,8 @@ public class JDBConnect extends c1 {
 	public void updateEmployeeDetails() {
 		try {
 			statement = connection.createStatement();
-			statement.executeUpdate(c2.Q("q2"));
-			statement.executeUpdate(c2.Q("q1"));
+			statement.executeUpdate(readContent.Q("q2"));
+			statement.executeUpdate(readContent.Q("q1"));
 
 		} catch (SQLSyntaxErrorException e) {
 			e.printStackTrace();
@@ -86,7 +116,7 @@ public class JDBConnect extends c1 {
 
 	public void insertEmployeeDetails() {
 		try {
-			preparedStatement = connection.prepareStatement(c2.Q("q3"));
+			preparedStatement = connection.prepareStatement(readContent.Q("q3"));
 			connection.setAutoCommit(false);
 			for (int i = 0; i < employees.size(); i++) {
 				Employee e = employees.get(i);
@@ -116,7 +146,7 @@ public class JDBConnect extends c1 {
 
 		Employee e = new Employee();
 		try {
-			preparedStatement = connection.prepareStatement(c2.Q("q4"));
+			preparedStatement = connection.prepareStatement(readContent.Q("q4"));
 			preparedStatement.setString(1, eid);
 			ResultSet R = preparedStatement.executeQuery();
 			while (R.next()) {
@@ -143,7 +173,7 @@ public class JDBConnect extends c1 {
 	public void employeeDelete(String eid) {
 
 		try {
-			preparedStatement = connection.prepareStatement(c2.Q("q6"));
+			preparedStatement = connection.prepareStatement(readContent.Q("q6"));
 			preparedStatement.setString(1, eid);
 			preparedStatement.executeUpdate();
 
@@ -160,7 +190,7 @@ public class JDBConnect extends c1 {
 
 		ArrayList<Employee> l = new ArrayList<Employee>();
 		try {
-			preparedStatement = connection.prepareStatement(c2.Q("q5"));
+			preparedStatement = connection.prepareStatement(readContent.Q("q5"));
 			ResultSet r = preparedStatement.executeQuery();
 			while (r.next()) {
 				Employee e = new Employee();
