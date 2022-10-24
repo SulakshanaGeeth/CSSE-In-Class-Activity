@@ -28,7 +28,7 @@ public class saveFilesPath extends c1 {
 
 	private static Map<String, String> m = null;
 
-	public static void rEQUESTtRANSFORM() throws Exception {
+	public static void requestTransform() throws Exception {
 
 		Source x = new StreamSource(new File("src/e/EmployeeRequest.xml"));
 		Source s = new StreamSource(new File("src/e/Employee-modified.xsl"));
@@ -36,7 +36,7 @@ public class saveFilesPath extends c1 {
 		TransformerFactory.newInstance().newTransformer(s).transform(x, o);
 	}
 
-	public static ArrayList<Map<String, String>> XMLXPATHS() throws Exception {
+	public static ArrayList<Map<String, String>> xmlxpaths() throws Exception {
 
 		Document d = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 				.parse("src/e/EmployeeResponse.xml");
