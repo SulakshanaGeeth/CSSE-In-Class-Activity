@@ -1,6 +1,10 @@
+package com.employee.main;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
+
+import com.employee.services.saveFilesPath;
+import com.employee.utill.JDBConnect;
 
 public class EmployeeDemo {
 
@@ -12,7 +16,7 @@ public class EmployeeDemo {
 		JDBConnect con = new JDBConnect();
 		try {
 			saveFilesPath.requestTransform();
-			con.readFilesPath();
+			con.readFilesPathXML();
 			con.updateEmployeeDetails();
 			con.insertEmployeeDetails();
 //			employeeService.eMPLOYEEGETBYID("EMP10004");
