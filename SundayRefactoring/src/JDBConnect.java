@@ -30,24 +30,21 @@ public class JDBConnect extends c1 {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
 					properties.getProperty("password"));
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 
 	public void readFilesPath() {
 
 		try {
-			int s = saveFilesPath.XMLXPATHS().size();
+			int s = saveFilesPath.xmlxpaths().size();
 			for (int i = 0; i < s; i++) {
-				Map<String, String> l = saveFilesPath.XMLXPATHS().get(i);
+				Map<String, String> l = saveFilesPath.xmlxpaths().get(i);
 				Employee EMPLOYEE = new Employee();
 				EMPLOYEE.setEmployeeID(l.get("XpathEmployeeIDKey"));
 				EMPLOYEE.setFullName(l.get("XpathEmployeeNameKey"));
@@ -58,18 +55,15 @@ public class JDBConnect extends c1 {
 				employees.add(EMPLOYEE);
 				System.out.println(EMPLOYEE.toString() + "\n");
 			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			
 		} catch (ArrayIndexOutOfBoundsException e) {
 			e.printStackTrace();
-			
+
 		} catch (NegativeArraySizeException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -78,16 +72,13 @@ public class JDBConnect extends c1 {
 			statement = connection.createStatement();
 			statement.executeUpdate(c2.Q("q2"));
 			statement.executeUpdate(c2.Q("q1"));
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			
+
 		} catch (SQLSyntaxErrorException e) {
 			e.printStackTrace();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +88,7 @@ public class JDBConnect extends c1 {
 		try {
 			preparedStatement = connection.prepareStatement(c2.Q("q3"));
 			connection.setAutoCommit(false);
-			for(int i = 0; i < employees.size(); i++){
+			for (int i = 0; i < employees.size(); i++) {
 				Employee e = employees.get(i);
 				preparedStatement.setString(1, e.getEmplyeeID());
 				preparedStatement.setString(2, e.getFullName());
@@ -109,16 +100,13 @@ public class JDBConnect extends c1 {
 			}
 			preparedStatement.executeBatch();
 			connection.commit();
-			
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			
+
 		} catch (SQLSyntaxErrorException e) {
 			e.printStackTrace();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,13 +130,13 @@ public class JDBConnect extends c1 {
 			ArrayList<Employee> l = new ArrayList<Employee>();
 			l.add(e);
 			employeeOutPut(l);
-			
+
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			
+
 		}
 	}
 
@@ -158,13 +146,13 @@ public class JDBConnect extends c1 {
 			preparedStatement = connection.prepareStatement(c2.Q("q6"));
 			preparedStatement.setString(1, eid);
 			preparedStatement.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 	}
 
@@ -184,35 +172,31 @@ public class JDBConnect extends c1 {
 				e.setDesignation(r.getString(6));
 				l.add(e);
 			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			
 		} catch (SQLSyntaxErrorException e) {
 			e.printStackTrace();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		employeeOutPut(l);
 	}
-	
-	public void employeeOutPut(ArrayList<Employee> l){
-		
+
+	public void employeeOutPut(ArrayList<Employee> l) {
+
 		System.out.println("Employee ID" + "\t\t" + "Full Name" + "\t\t" + "Address" + "\t\t" + "Faculty Name" + "\t\t"
 				+ "Department" + "\t\t" + "Designation" + "\n");
-		System.out
-				.println("================================================================================================================");
-		for(int i = 0; i < l.size(); i++){
+		System.out.println(
+				"================================================================================================================");
+		for (int i = 0; i < l.size(); i++) {
 			Employee e = l.get(i);
-			System.out.println(e.getEmplyeeID() + "\t" + e.getFullName() + "\t\t"
-					+ e.getAddress() + "\t" + e.getFacultyName() + "\t" + e.getDepartment() + "\t"
-					+ e.getDesignation() + "\n");
-			System.out
-			.println("----------------------------------------------------------------------------------------------------------------");
+			System.out.println(e.getEmplyeeID() + "\t" + e.getFullName() + "\t\t" + e.getAddress() + "\t"
+					+ e.getFacultyName() + "\t" + e.getDepartment() + "\t" + e.getDesignation() + "\n");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------");
 		}
-		
+
 	}
 }

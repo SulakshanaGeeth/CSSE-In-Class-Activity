@@ -11,7 +11,7 @@ public class EmployeeDemo {
 
 		JDBConnect con = new JDBConnect();
 		try {
-			saveFilesPath.rEQUESTtRANSFORM();
+			saveFilesPath.requestTransform();
 			con.readFilesPath();
 			con.updateEmployeeDetails();
 			con.insertEmployeeDetails();
